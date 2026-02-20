@@ -63,3 +63,10 @@ L'erreur `ERR_CONNECTION_REFUSED` signifie généralement que le serveur local n
    ./run-local.sh 8080
    ```
    et ouvrir `http://localhost:8080`.
+## Utilisation locale
+
+```bash
+python3 -m http.server 4173
+```
+
+Ouvrir ensuite `http://localhost:4173` sur smartphone ou navigateur desktop (mode responsive).
