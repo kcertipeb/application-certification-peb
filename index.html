@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>PEB Terrain – Assistant Visite</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Assistant de relevé terrain</p>
+        <h1>PEB Bruxelles · Mobile</h1>
+      </div>
+      <button id="saveAppBtn" class="btn primary">Sauver</button>
+    </header>
+
+    <main class="app">
+      <section class="card" id="dossierSection">
+        <h2>Dossier logement</h2>
+        <div class="stack">
+          <label>Référence
+            <input type="text" id="dossierRef" placeholder="PEB-BXL-2026-014" />
+          </label>
+          <label>Adresse
+            <input type="text" id="dossierAddress" placeholder="Rue / N° / Commune" />
+          </label>
+          <label>Date de visite
+            <input type="date" id="dossierDate" />
+          </label>
+        </div>
+      </section>
+
+      <section class="card" id="floorSection">
+        <div class="section-head">
+          <h2>Étages</h2>
+          <button id="addFloorBtn" class="btn">+ Étage</button>
+        </div>
+        <div id="floorTabs" class="chips"></div>
+      </section>
+
+      <section class="card" id="planSection">
+        <div class="section-head">
+          <h2>Plan 2D simple</h2>
+          <button id="addRoomBtn" class="btn">+ Pièce</button>
+        </div>
+        <p class="muted">Ajoutez des pièces rectangulaires et tapez une pièce pour l’éditer.</p>
+        <div id="planCanvas" class="plan-canvas"></div>
+      </section>
+
+      <section class="card" id="roomSection">
+        <div class="section-head">
+          <h2>Pièce active</h2>
+          <span id="activeRoomHint" class="muted">Aucune pièce sélectionnée</span>
+        </div>
+
+        <div id="roomEditor" class="stack hidden">
+          <label>Nom / type
+            <input id="roomName" type="text" placeholder="Séjour, Chambre 1..." />
+          </label>
+          <div class="split">
+            <label>Surface (m²)
+              <input id="roomArea" type="number" min="0" step="0.1" />
+            </label>
+            <label>Hauteur (m)
+              <input id="roomHeight" type="number" min="0" step="0.01" />
+            </label>
+          </div>
+          <label>Notes terrain
+            <textarea id="roomNotes" rows="3" placeholder="Indices, mesures, remarques sur site"></textarea>
+          </label>
+          <label>Photos générales pièce
+            <input id="roomPhotos" type="file" accept="image/*" capture="environment" multiple />
+          </label>
+          <div id="roomPhotoList" class="photo-list"></div>
+        </div>
+      </section>
+
+      <section class="card" id="objectsSection">
+        <h2>Objets terrain de la pièce</h2>
+        <div id="objectsEditor" class="hidden">
+          <details open>
+            <summary>Châssis</summary>
+            <button class="btn" id="addWindowBtn">+ Ajouter châssis</button>
+            <div id="windowList" class="list"></div>
+          </details>
+
+          <details>
+            <summary>Émetteurs de chauffage</summary>
+            <button class="btn" id="addEmitterBtn">+ Ajouter émetteur</button>
+            <div id="emitterList" class="list"></div>
+          </details>
+
+          <details>
+            <summary>Observations de parois (terrain)</summary>
+            <button class="btn" id="addWallObsBtn">+ Ajouter observation</button>
+            <div id="wallObsList" class="list"></div>
+          </details>
+        </div>
+        <p id="objectsHint" class="muted">Sélectionnez une pièce pour ajouter des éléments.</p>
+      </section>
+
+      <section class="card sticky-actions">
+        <button id="exportBtn" class="btn primary">Exporter JSON</button>
+        <label class="btn">Importer JSON
+          <input id="importInput" type="file" accept="application/json" />
+        </label>
+        <button id="loadBtn" class="btn">Recharger local</button>
+      </section>
+
+      <section class="card">
+        <h2>Rappels protocole (non bloquants)</h2>
+        <div id="alerts" class="alerts"></div>
+      </section>
+    </main>
+
+    <p id="status" aria-live="polite"></p>
+    <script src="script.js"></script>
+  </body>
+</html>
